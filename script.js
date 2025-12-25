@@ -27,14 +27,14 @@ async function fetchGitHubData() {
             </div>
         `;
 
-        // Pinned Repositories (manually defined since GitHub REST API doesn't support pinned repos)
+        // Pinned Repositories (from GitHub profile)
         const pinnedRepoNames = [
+            'ideas',
             'ExplainCode',
-            'medkey-vault-plus',
+            'SecureVault',
+            'devansh-portfolio',
             'esp32-wheelchair-sim',
-            'mediapipe-robot',
-            'aqi-bilstm-model',
-            'devansh-portfolio'
+            'student-link-blast'
         ];
 
         const projectsContainer = document.getElementById('projects-container');
