@@ -27,40 +27,52 @@ async function fetchGitHubData() {
             </div>
         `;
 
-        // Fetch Repos - Limited to 10 starting ones
-        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=created&direction=asc&per_page=10`);
-        const reposData = await reposResponse.json();
+        // Pinned Repositories (manually defined since GitHub REST API doesn't support pinned repos)
+        const pinnedRepoNames = [
+            'ExplainCode',
+            'medkey-vault-plus',
+            'esp32-wheelchair-sim',
+            'mediapipe-robot',
+            'aqi-bilstm-model',
+            'devansh-portfolio'
+        ];
 
         const projectsContainer = document.getElementById('projects-container');
         if (projectsContainer) {
             projectsContainer.innerHTML = '';
-            reposData.forEach(repo => {
-                if (repo.name === GITHUB_USERNAME) return;
 
-                const card = document.createElement('div');
-                card.className = 'project-card reveal';
-                card.style.display = 'flex';
-                card.style.flexDirection = 'column';
-                card.style.height = '100%';
+            for (const repoName of pinnedRepoNames) {
+                try {
+                    const repoResponse = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`);
+                    if (!repoResponse.ok) continue;
+                    const repo = await repoResponse.json();
 
-                card.innerHTML = `
-                    <div class="project-header">
-                        <span class="project-category mono" style="font-size: 0.7rem;">${repo.language || 'Software'}</span>
-                        <h3 class="project-name" style="font-size: 1.4rem;">${repo.name}</h3>
-                    </div>
-                    <p class="project-desc" style="font-size: 0.9rem;">${repo.name}</p>
-                    <div class="project-actions" style="margin-top: auto;">
-                        <a href="${repo.html_url}" target="_blank" class="btn-icon">
-                            <i data-lucide="github"></i>
-                        </a>
-                        ${repo.homepage ? `
-                        <a href="${repo.homepage}" target="_blank" class="btn-icon">
-                            <i data-lucide="external-link"></i>
-                        </a>` : ''}
-                    </div>
-                `;
-                projectsContainer.appendChild(card);
-            });
+                    const card = document.createElement('div');
+                    card.className = 'project-card reveal';
+
+                    card.innerHTML = `
+                        <div class="project-badge">${repo.language || 'System'}</div>
+                        <h3 class="project-title">${repo.name}</h3>
+                        <p class="project-description">${repo.description || repo.name}</p>
+                        <div class="project-meta">
+                            <span><i data-lucide="star"></i> ${repo.stargazers_count}</span>
+                            <span><i data-lucide="git-fork"></i> ${repo.forks_count}</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="${repo.html_url}" target="_blank" class="project-link">
+                                <i data-lucide="github"></i> View Code
+                            </a>
+                            ${repo.homepage ? `
+                            <a href="${repo.homepage}" target="_blank" class="project-link secondary">
+                                <i data-lucide="external-link"></i> Live
+                            </a>` : ''}
+                        </div>
+                    `;
+                    projectsContainer.appendChild(card);
+                } catch (e) {
+                    console.warn(`Could not fetch ${repoName}`);
+                }
+            }
         }
 
         lucide.createIcons();
