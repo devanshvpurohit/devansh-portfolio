@@ -27,8 +27,8 @@ async function fetchGitHubData() {
             </div>
         `;
 
-        // Fetch Repos
-        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=100`);
+        // Fetch Repos - Limited to 10 starting ones
+        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=created&direction=asc&per_page=10`);
         const reposData = await reposResponse.json();
 
         const projectsContainer = document.getElementById('projects-container');
@@ -48,7 +48,7 @@ async function fetchGitHubData() {
                         <span class="project-category mono" style="font-size: 0.7rem;">${repo.language || 'Software'}</span>
                         <h3 class="project-name" style="font-size: 1.4rem;">${repo.name}</h3>
                     </div>
-                    <p class="project-desc" style="font-size: 0.9rem;">${repo.description || 'System-level architecture and high-performance implementation.'}</p>
+                    <p class="project-desc" style="font-size: 0.9rem;">${repo.name}</p>
                     <div class="project-actions" style="margin-top: auto;">
                         <a href="${repo.html_url}" target="_blank" class="btn-icon">
                             <i data-lucide="github"></i>
