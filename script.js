@@ -28,38 +28,40 @@ async function fetchGitHubData() {
         `;
 
         // Fetch Repos
-        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=12`);
+        const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=100`);
         const reposData = await reposResponse.json();
 
         const projectsContainer = document.getElementById('projects-container');
-        projectsContainer.innerHTML = '';
+        if (projectsContainer) {
+            projectsContainer.innerHTML = '';
+            reposData.forEach(repo => {
+                if (repo.name === GITHUB_USERNAME) return;
 
-        // Repos already featured manually
-        const featuredRepos = ['ExplainCode', 'medkey-vault-plus', 'mediapipe-robot', 'esp32-wheelchair-sim'];
+                const card = document.createElement('div');
+                card.className = 'project-card reveal';
+                card.style.display = 'flex';
+                card.style.flexDirection = 'column';
+                card.style.height = '100%';
 
-        reposData.forEach(repo => {
-            if (repo.name === GITHUB_USERNAME || featuredRepos.includes(repo.name)) return;
-
-            const card = document.createElement('div');
-            card.className = 'project-card reveal';
-            card.innerHTML = `
-                <div class="project-header">
-                    <span class="project-category mono" style="font-size: 0.7rem;">${repo.language || 'Software'}</span>
-                    <h3 class="project-name" style="font-size: 1.4rem;">${repo.name}</h3>
-                </div>
-                <p class="project-desc" style="font-size: 0.9rem;">${repo.description || 'System-level architecture and high-performance implementation.'}</p>
-                <div class="project-actions" style="margin-top: auto;">
-                    <a href="${repo.html_url}" target="_blank" class="btn-icon">
-                        <i data-lucide="github"></i>
-                    </a>
-                    ${repo.homepage ? `
-                    <a href="${repo.homepage}" target="_blank" class="btn-icon">
-                        <i data-lucide="external-link"></i>
-                    </a>` : ''}
-                </div>
-            `;
-            projectsContainer.appendChild(card);
-        });
+                card.innerHTML = `
+                    <div class="project-header">
+                        <span class="project-category mono" style="font-size: 0.7rem;">${repo.language || 'Software'}</span>
+                        <h3 class="project-name" style="font-size: 1.4rem;">${repo.name}</h3>
+                    </div>
+                    <p class="project-desc" style="font-size: 0.9rem;">${repo.description || 'System-level architecture and high-performance implementation.'}</p>
+                    <div class="project-actions" style="margin-top: auto;">
+                        <a href="${repo.html_url}" target="_blank" class="btn-icon">
+                            <i data-lucide="github"></i>
+                        </a>
+                        ${repo.homepage ? `
+                        <a href="${repo.homepage}" target="_blank" class="btn-icon">
+                            <i data-lucide="external-link"></i>
+                        </a>` : ''}
+                    </div>
+                `;
+                projectsContainer.appendChild(card);
+            });
+        }
 
         lucide.createIcons();
 
