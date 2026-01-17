@@ -12,10 +12,13 @@ async function fetchGitHubData() {
         document.getElementById('gh-public-repos').textContent = userData.public_repos;
         document.getElementById('gh-followers').textContent = userData.followers;
 
-        // Update Cursor Follower with Profile Pic
-        const follower = document.querySelector('.cursor-follower');
-        if (follower && userData.avatar_url) {
-            follower.style.backgroundImage = `url('${userData.avatar_url}')`;
+        // Update Cursor Follower & Hero with Profile Pic
+        if (userData.avatar_url) {
+            const follower = document.querySelector('.cursor-follower');
+            if (follower) follower.style.backgroundImage = `url('${userData.avatar_url}')`;
+
+            const heroPic = document.getElementById('hero-profile-pic');
+            if (heroPic) heroPic.src = userData.avatar_url;
         }
 
         // Update GH Profile Card
