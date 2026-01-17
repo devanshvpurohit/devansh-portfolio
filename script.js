@@ -12,6 +12,12 @@ async function fetchGitHubData() {
         document.getElementById('gh-public-repos').textContent = userData.public_repos;
         document.getElementById('gh-followers').textContent = userData.followers;
 
+        // Update Cursor Follower with Profile Pic
+        const follower = document.querySelector('.cursor-follower');
+        if (follower && userData.avatar_url) {
+            follower.style.backgroundImage = `url('${userData.avatar_url}')`;
+        }
+
         // Update GH Profile Card
         const ghProfile = document.getElementById('gh-profile');
         ghProfile.innerHTML = `
@@ -84,21 +90,21 @@ async function fetchGitHubData() {
 
 // Custom Cursor
 const cursor = document.querySelector('.cursor-glow');
-const follower = document.createElement('div');
-follower.className = 'cursor-follower';
-document.body.appendChild(follower);
+const follower = document.querySelector('.cursor-follower');
 
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    const { clientX: x, clientY: y } = e;
+
+    cursor.style.left = `${x}px`;
+    cursor.style.top = `${y}px`;
 
     follower.style.display = 'block';
-    follower.style.left = e.clientX + 'px';
-    follower.style.top = e.clientY + 'px';
+    follower.style.left = `${x}px`;
+    follower.style.top = `${y}px`;
 });
 
-document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
-document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
 
 // Navbar Toggle
 window.addEventListener('scroll', () => {

@@ -33,7 +33,6 @@ canvas {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    cursor: none !important;
 }
 
 html {
@@ -119,26 +118,30 @@ code,
 /* Custom Cursor */
 .cursor-glow {
     position: fixed;
-    width: 20px;
-    height: 20px;
-    background: var(--accent);
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.2s ease;
+    z-index: 10000;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
 }
 
 .cursor-follower {
     position: fixed;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    background-position: center;
     border-radius: 50%;
+    border: 2px solid var(--primary);
     pointer-events: none;
-    z-index: 9997;
+    z-index: 9999;
     transform: translate(-50%, -50%);
+    transition: transform 0.15s cubic-bezier(0.17, 0.67, 0.83, 0.67);
     display: none;
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
 }
 
 /* Navigation */
