@@ -14,7 +14,7 @@
     --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
-#bg-canvas {
+.background-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +22,10 @@
     height: 100%;
     z-index: -2;
     background: black;
+}
+
+canvas {
+    display: block;
 }
 
 * {
