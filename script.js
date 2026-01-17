@@ -91,23 +91,58 @@ async function fetchGitHubData() {
     }
 }
 
-// Custom Cursor
+// Custom Cursor with Smooth Easing
 const cursor = document.querySelector('.cursor-glow');
 const follower = document.querySelector('.cursor-follower');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+let followerX = 0, followerY = 0;
 
 document.addEventListener('mousemove', (e) => {
-    const { clientX: x, clientY: y } = e;
-
-    cursor.style.left = `${x}px`;
-    cursor.style.top = `${y}px`;
-
+    mouseX = e.clientX;
+    mouseY = e.clientY;
     follower.style.display = 'block';
-    follower.style.left = `${x}px`;
-    follower.style.top = `${y}px`;
 });
+
+function animateCursor() {
+    // Smooth easing for glow
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+
+    // Slower easing for avatar follower (Parallax effect)
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
+    follower.style.left = `${followerX}px`;
+    follower.style.top = `${followerY}px`;
+
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
 document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
 document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+
+// Premium ScrollReveal Config
+const sr = ScrollReveal({
+    origin: 'bottom',
+    distance: '60px',
+    duration: 1000,
+    delay: 200,
+    easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+    reset: false
+});
+
+sr.reveal('.hero-avatar-container', { delay: 300, scale: 0.8, origin: 'top' });
+sr.reveal('.hero-tagline', { delay: 400 });
+sr.reveal('.hero-title', { delay: 500, distance: '100px' });
+sr.reveal('.hero-subtitle', { delay: 600 });
+sr.reveal('.hero-cta', { delay: 700 });
+sr.reveal('.stat-card', { interval: 100, scale: 0.9 });
+sr.reveal('.section-header', { origin: 'left', distance: '100px' });
+sr.reveal('.project-card', { interval: 150, distance: '40px' });
+sr.reveal('.gh-contributions', { delay: 400, scale: 0.95 });
 
 // Navbar Toggle
 window.addEventListener('scroll', () => {
