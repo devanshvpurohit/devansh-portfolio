@@ -156,7 +156,7 @@ async function initBackground() {
         ctx.font = `bold ${u(45)}px Tourney`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = "#fff";
+        ctx.fillStyle = "#000";
         ctx.fillText("ENGINEERING EXCELLENCE", c.width * 0.5, c.height * 0.5);
 
         const tex = new THREE.CanvasTexture(c);
@@ -209,9 +209,9 @@ async function initBackground() {
 
         f.assign(tsl.max(f, texVal.r));
 
-        // Gold theme colors: #C5A059 (0.77, 0.63, 0.35)
+        // Flip: White background (1, 1, 1), Gold lines (0.77, 0.63, 0.35)
         const goldColor = tsl.vec3(0.77, 0.63, 0.35);
-        const col = tsl.mix(tsl.vec3(0, 0, 0), goldColor, f).toVar();
+        const col = tsl.mix(tsl.vec3(1, 1, 1), goldColor, f).toVar();
 
         return col;
     })();
