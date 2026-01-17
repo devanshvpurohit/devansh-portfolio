@@ -211,7 +211,7 @@ async function initBackground() {
 
         // Gold theme colors: #C5A059 (0.77, 0.63, 0.35)
         const goldColor = tsl.vec3(0.77, 0.63, 0.35);
-        const col = tsl.mix(goldColor, tsl.vec3(0, 0, 0), f).toVar();
+        const col = tsl.mix(tsl.vec3(0, 0, 0), goldColor, f).toVar();
 
         return col;
     })();
