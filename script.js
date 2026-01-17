@@ -143,6 +143,32 @@ sr.reveal('.stat-card', { interval: 100, scale: 0.9 });
 sr.reveal('.section-header', { origin: 'left', distance: '100px' });
 sr.reveal('.project-card', { interval: 150, distance: '40px' });
 sr.reveal('.gh-contributions', { delay: 400, scale: 0.95 });
+sr.reveal('.expertise-card', { interval: 150, distance: '40px', scale: 0.9 });
+
+// Mobile Menu Logic
+const mobileToggle = document.getElementById('mobile-toggle');
+const mobileOverlay = document.getElementById('mobile-overlay');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+
+mobileToggle?.addEventListener('click', () => {
+    mobileOverlay.classList.toggle('active');
+    const icon = mobileToggle.querySelector('i');
+    if (mobileOverlay.classList.contains('active')) {
+        icon.setAttribute('data-lucide', 'x');
+    } else {
+        icon.setAttribute('data-lucide', 'menu');
+    }
+    lucide.createIcons();
+});
+
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileOverlay.classList.remove('active');
+        const icon = mobileToggle.querySelector('i');
+        icon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+    });
+});
 
 // Navbar Toggle
 window.addEventListener('scroll', () => {

@@ -42,11 +42,20 @@
                 <li><a href="#github" class="nav-item">Open Source</a></li>
                 <li><a href="#contact" class="nav-item contact-btn">Let's Collaborate</a></li>
             </ul>
-            <div class="mobile-menu-btn">
+            <div class="mobile-menu-btn" id="mobile-toggle">
                 <i data-lucide="menu"></i>
             </div>
         </div>
     </nav>
+
+    <div class="mobile-nav-overlay" id="mobile-overlay">
+        <div class="mobile-nav-links">
+            <a href="#about" class="nav-item mobile-link">About</a>
+            <a href="#projects" class="nav-item mobile-link">Engineering</a>
+            <a href="#github" class="nav-item mobile-link">Open Source</a>
+            <a href="#contact" class="nav-item mobile-link">Contact</a>
+        </div>
+    </div>
 
     <section class="hero" id="home">
         <div class="hero-bg">
@@ -74,6 +83,33 @@
             <div class="scroll-down">
                 <div class="mouse"></div>
                 <span>SCROLL TO DISCOVER</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="expertise-section" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Core <span class="gradient-text">Expertise</span></h2>
+                <p class="section-desc">Bridging the gap between high-level AI architectures and low-level system
+                    engineering.</p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card reveal">
+                    <div class="exp-icon"><i data-lucide="brain-circuit"></i></div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Computer Vision, NLP, and predictive modeling for autonomous systems.</p>
+                </div>
+                <div class="expertise-card reveal">
+                    <div class="exp-icon"><i data-lucide="binary"></i></div>
+                    <h3>Core Engineering</h3>
+                    <p>C/C++, Embedded systems, and performance-critical software development.</p>
+                </div>
+                <div class="expertise-card reveal">
+                    <div class="exp-icon"><i data-lucide="shield-check"></i></div>
+                    <h3>Security & Systems</h3>
+                    <p>Hardware-level security, secure data vaults, and protocol engineering.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -172,29 +208,6 @@
     </footer>
 
     <script type="module" src="script.js"></script>
-    <script>
-        lucide.createIcons();
-        ScrollReveal().reveal('.reveal', {
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            duration: 1000,
-            easing: 'cubic-bezier(0.5, 0, 0, 1)',
-            interval: 100
-        });
-        ScrollReveal().reveal('.reveal-left', {
-            delay: 100,
-            distance: '100px',
-            origin: 'left',
-            duration: 1200
-        });
-        ScrollReveal().reveal('.reveal-top', {
-            delay: 100,
-            distance: '30px',
-            origin: 'top',
-            duration: 1000
-        });
-    </script>
 </body>
 
 </html>
