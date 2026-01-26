@@ -2,56 +2,18 @@ import * as THREE from "three/webgpu";
 import * as tsl from "three/tsl";
 
 /**
- * Three.js WebGPU Background
- * Lazy-loaded only on the Home page
+ * Three.js WebGPU Background: Engineering Blueprint
+ * A sophisticated, mathematical grid system
  */
 export async function initBackground() {
-    if (window.innerWidth <= 768) return; // Hard Rule: No 3JS Background on Mobile
+    if (window.innerWidth <= 768) return;
 
     const container = document.querySelector('.background-container');
     if (!container) return;
 
-    // Load custom fonts for text in background
-    await (async function () {
-        async function loadFont(fontface) {
-            await fontface.load();
-            document.fonts.add(fontface);
-        }
-        let fonts = [
-            new FontFace(
-                "Tourney",
-                "url(https://fonts.gstatic.com/s/tourney/v16/AlZv_ztDtYzv1tzq1wcJnbVt7xseomk-tPE3gk0.woff2) format('woff2')"
-            )
-        ];
-        for (let font of fonts) {
-            await loadFont(font);
-        }
-    })();
-
-    const texWriting = (() => {
-        const c = document.createElement("canvas");
-        c.width = 1024;
-        c.height = 256;
-        const ctx = c.getContext("2d");
-        const u = val => val * 0.01 * c.height;
-
-        ctx.font = `bold ${u(45)}px Tourney`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000";
-        ctx.fillText("ENGINEERING EXCELLENCE", c.width * 0.5, c.height * 0.5);
-
-        const tex = new THREE.CanvasTexture(c);
-        tex.flipY = false;
-        tex.colorSpace = "srgb";
-        tex.anisotropy = 16;
-
-        return tex;
-    })();
-
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
-    camera.position.set(0, 0, 1).setLength(10);
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 2;
 
     const renderer = new THREE.WebGPURenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -69,31 +31,33 @@ export async function initBackground() {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    scene.backgroundNode = tsl.Fn(([t = tsl.time]) => {
-        const uvRatio = tsl.screenSize.x.div(tsl.screenSize.y).toVar();
-        const uvMain = tsl.screenUV.mul(tsl.vec2(uvRatio, 1.)).mul(3).toVar();
+    // Blueprint Grid Shader
+    const blueprintNode = tsl.Fn(() => {
+        const uvMain = tsl.screenUV.toVar();
+        const ratio = tsl.screenSize.x.div(tsl.screenSize.y);
+        const uv = uvMain.mul(tsl.vec2(ratio, 1.0)).mul(10.0).toVar(); // Grid scale
 
-        const mouseDist = tsl.distance(tsl.screenUV, mouse).toVar();
-        const mouseInfluence = tsl.smoothstep(0.0, 0.5, mouseDist).oneMinus().mul(0.5);
+        // Main Grid Lines
+        const gridLines = tsl.abs(tsl.fract(uv.sub(0.5)).sub(0.5)).div(tsl.fwidth(uv)).toVar();
+        const line = tsl.min(gridLines.x, gridLines.y).smoothstep(0.0, 1.0).oneMinus();
 
-        const nVal = tsl.mx_noise_float(tsl.vec3(uvMain, t.mul(0.08).add(mouseInfluence))).toVar();
-        const fw = tsl.fwidth(nVal).toVar();
-        nVal.assign(nVal.mul(15).fract().sub(0.5).abs());
-        const f = tsl.smoothstep(fw.mul(5), fw.mul(30), nVal).oneMinus().toVar();
+        // Sub-Dots at intersections
+        const dots = tsl.length(tsl.fract(uv).sub(0.5)).smoothstep(0.03, 0.01).mul(0.3);
 
-        const texUV = tsl.screenUV
-            .sub(0.5)
-            .mul(tsl.vec2(uvRatio, 4))
-            .add(0.5).toVar();
-        const texVal = tsl.texture(texWriting, texUV).toVar();
+        // Circular Mouse HUD
+        const dist = tsl.distance(tsl.screenUV, mouse).toVar();
+        const ring = tsl.abs(dist.sub(0.15)).smoothstep(0.005, 0.0).mul(0.1);
+        const glow = tsl.smoothstep(0.3, 0.0, dist).mul(0.05);
 
-        f.assign(tsl.max(f, texVal.r));
+        // Colors
+        const baseColor = tsl.vec3(0.98, 0.98, 0.98); // Matches --bg
+        const gridColor = tsl.vec3(0.1, 0.1, 0.1).mul(line.mul(0.05)); // Subtle Lines
+        const dotColor = tsl.vec3(0.72, 0.59, 0.31).mul(dots); // Refined Gold Dots
 
-        const goldColor = tsl.vec3(0.77, 0.63, 0.35);
-        const col = tsl.mix(tsl.vec3(1, 1, 1), goldColor, f).toVar();
-
-        return col;
+        return baseColor.add(gridColor).add(dotColor).add(tsl.vec3(0.72, 0.59, 0.31).mul(ring.add(glow)));
     })();
+
+    scene.backgroundNode = blueprintNode;
 
     renderer.setAnimationLoop(() => {
         renderer.render(scene, camera);
