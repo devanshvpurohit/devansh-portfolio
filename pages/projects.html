@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Devansh - Engineering Showcase</title>
+    <title>Projects | Devansh - Engineering Benchmarks</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/components.css">
     <link rel="stylesheet" href="../styles/pages/projects.css">
@@ -19,65 +19,83 @@
     <main style="padding-top: var(--space-12);">
         <section class="section-padding">
             <div class="container">
-                <div class="section-header" style="text-align: center; margin-bottom: var(--space-10);">
-                    <span class="badge" style="margin-bottom: var(--space-4);">Portfolio</span>
-                    <h2 style="margin-bottom: var(--space-4);">Selected <span class="gradient-text">Engineering
-                            Works.</span></h2>
-                    <p style="max-width: 600px; margin: 0 auto;">Proof of competence in high-performance computing, AI
-                        architectures, and secure systems.</p>
-                </div>
+                <header class="section-header" style="margin-bottom: var(--space-12);">
+                    <span class="badge" style="margin-bottom: var(--space-4);">Engineering Registry</span>
+                    <h2 style="margin-bottom: var(--space-4);">Selected <span class="gradient-text">Productions.</span>
+                    </h2>
+                    <p>A hierarchy of projects from flagship systems to experimental prototypes.</p>
+                </header>
 
-                <div class="filter-group">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="ai">AI / ML</button>
-                    <button class="filter-btn" data-filter="systems">Systems</button>
-                    <button class="filter-btn" data-filter="security">Security</button>
-                </div>
+                <div class="projects-container">
+                    <!-- BLOCK 1: Flagship Projects -->
+                    <div id="flagship-projects" class="flagship-grid">
+                        <h3 class="mono"
+                            style="font-size: var(--fs-xs); color: var(--primary-dark); margin-bottom: var(--space-4);">
+                            // FLAGSHIP_SYSTEMS</h3>
 
-                <div class="projects-grid focus-dim-container" id="projects-grid">
-                    <!-- Project Card 1: AI -->
-                    <article class="card project-item" data-category="ai">
-                        <div class="project-meta-top">
-                            <span class="badge">AI / CV</span>
-                            <div class="project-links">
-                                <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
+                        <article class="card project-card flagship focus-dim-container">
+                            <div class="flagship-content">
+                                <span class="badge" style="margin-bottom: var(--space-3);">Security / C++</span>
+                                <h3>SecureVault</h3>
+                                <p style="font-size: var(--fs-lg); margin-bottom: var(--space-4);">Encrypted data
+                                    storage engine for security-critical environments.</p>
+
+                                <div class="flagship-specs">
+                                    <div class="spec-item">
+                                        <label>Problem</label>
+                                        <p>Existing vaults suffered from high latency and metadata leakage during search
+                                            operations.</p>
+                                    </div>
+                                    <div class="spec-item">
+                                        <label>Solution</label>
+                                        <p>Built a custom encrypted B-tree implementation with ORAM-inspired access
+                                            patterns.</p>
+                                    </div>
+                                    <div class="spec-item">
+                                        <label>Impact</label>
+                                        <p><strong>↓ 40% latency</strong> vs standard libsodium implementations with
+                                            hardware-level protection.</p>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: var(--space-6); display: flex; gap: var(--space-3);">
+                                    <a href="https://github.com/devanshvpurohit/SecureVault" target="_blank"
+                                        class="btn btn-primary">Source <i data-lucide="github"></i></a>
+                                    <a href="project-detail.html?slug=securevault" class="btn btn-secondary">Full Case
+                                        Study</a>
+                                </div>
                             </div>
-                        </div>
-                        <h3 class="project-title">Autonomous Drone Navigator</h3>
-                        <p class="project-excerpt">Real-time object detection and path planning using YOLOv8 and
-                            depth-sensing cameras.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">#PyTorch</span>
-                            <span class="project-tag">#OpenCV</span>
-                        </div>
-                        <a href="project-detail.html?slug=drone-navigator" class="btn btn-secondary"
-                            style="width: 100%; justify-content: center;">
-                            Case Study <i data-lucide="chevron-right"></i>
-                        </a>
-                    </article>
-
-                    <!-- Project Card 2: Systems -->
-                    <article class="card project-item" data-category="systems">
-                        <div class="project-meta-top">
-                            <span class="badge">Systems / CPP</span>
-                            <div class="project-links">
-                                <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
+                            <div class="flagship-visual"
+                                style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-style: italic;">
+                                [ System Architecture ]
                             </div>
-                        </div>
-                        <h3 class="project-title">Low-Latency Motor Controller</h3>
-                        <p class="project-excerpt">C++ driver for real-time BLDC motor control with PID loops and sensor
-                            fusion.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">#C++20</span>
-                            <span class="project-tag">#RealTime</span>
-                        </div>
-                        <a href="project-detail.html?slug=motor-controller" class="btn btn-secondary"
-                            style="width: 100%; justify-content: center;">
-                            Case Study <i data-lucide="chevron-right"></i>
-                        </a>
-                    </article>
+                        </article>
+                    </div>
 
-                    <!-- More projects would be added here or dynamically loaded -->
+                    <!-- BLOCK 2: Supporting Projects -->
+                    <div id="supporting-projects">
+                        <h3 class="mono"
+                            style="font-size: var(--fs-xs); color: var(--primary-dark); margin-bottom: var(--space-6);">
+                            // SUPPORTING_WORKS</h3>
+                        <div class="supporting-grid focus-dim-container" id="supporting-grid">
+                            <!-- Populated via script.js -->
+                        </div>
+                    </div>
+
+                    <!-- BLOCK 3: Experiments -->
+                    <div class="experiments-section">
+                        <details>
+                            <summary
+                                style="cursor: pointer; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 10px;">
+                                <span class="mono" style="font-size: var(--fs-xs);">// LAB_EXPERIMENTS
+                                    (Collapsible)</span>
+                                <i data-lucide="chevron-down" style="width: 16px;"></i>
+                            </summary>
+                            <div class="experiments-grid" id="experiments-grid" style="margin-top: var(--space-6);">
+                                <!-- Populated via script.js -->
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </section>
@@ -86,78 +104,41 @@
     <script src="../js/main.js"></script>
     <script>
         const USERNAME = 'devanshvpurohit';
-        const pinnedRepoNames = [
-            'ideas',
-            'ExplainCode',
-            'SecureVault',
-            'devansh-portfolio',
-            'esp32-wheelchair-sim',
-            'student-link-blast'
-        ];
+        const flagshipRepos = ['SecureVault', 'ExplainCode'];
+        const experimentRepos = ['ideas', 'student-link-blast'];
 
-        async function fetchProjects() {
-            const grid = document.getElementById('projects-grid');
-            grid.innerHTML = ''; // Clear loaders
+        async function populateProjects() {
+            try {
+                const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=12`);
+                const repos = await res.json();
+                
+                const supportingGrid = document.getElementById('supporting-grid');
+                const experimentsGrid = document.getElementById('experiments-grid');
 
-            for (const repoName of pinnedRepoNames) {
-                try {
-                    const res = await fetch(`https://api.github.com/repos/${USERNAME}/${repoName}`);
-                    if (!res.ok) continue;
-                    const repo = await res.json();
+                repos.forEach(repo => {
+                    if (flagshipRepos.includes(repo.name)) return; // Handled manually above
 
-                    // Map categories for filtering (heuristic)
-                    let category = 'systems';
-                    if (repoName.includes('AI') || repo.language === 'Python') category = 'ai';
-                    if (repoName.includes('Vault') || repoName.includes('Secure')) category = 'security';
+                    const isExperiment = experimentRepos.includes(repo.name);
+                    const targetGrid = isExperiment ? experimentsGrid : supportingGrid;
 
-                    const card = document.createElement('article');
-                    card.className = 'card project-item';
-                    card.dataset.category = category;
+                    const card = document.createElement('div');
+                    card.className = isExperiment ? 'card exp-card' : 'card';
                     card.innerHTML = `
-                        <div class="project-meta-top">
-                            <span class="badge">${repo.language || 'System'}</span>
-                            <div class="project-links">
-                                <a href="${repo.html_url}" target="_blank"><i data-lucide="github"></i></a>
-                            </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span class="badge">${repo.language || 'Code'}</span>
+                            <span><i data-lucide="star" style="width:14px"></i> ${repo.stargazers_count}</span>
                         </div>
-                        <h3 class="project-title">${repo.name}</h3>
-                        <p class="project-excerpt">${repo.description || 'No description available.'}</p>
-                        <div class="project-tags">
-                            <span class="project-tag">#${repo.language || 'Code'}</span>
-                            ${repo.stargazers_count > 0 ? `<span class="project-tag"><i data-lucide="star" style="width:12px"></i> ${repo.stargazers_count}</span>` : ''}
-                        </div>
-                        <a href="${repo.homepage || repo.html_url}" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-                            View Source <i data-lucide="arrow-right"></i>
-                        </a>
+                        <h4 style="margin-bottom: 8px;">${repo.name}</h4>
+                        <p style="font-size: 14px; margin-bottom: 16px; opacity: 0.8;">${repo.description || 'System component.'}</p>
+                        <a href="${repo.html_url}" target="_blank" style="font-weight: 700; color: var(--primary); font-size: 12px;">View Source <i data-lucide="arrow-right" style="width: 14px;"></i></a>
                     `;
-                    grid.appendChild(card);
-                } catch (e) {
-                    console.error(`Error fetching ${repoName}:`, e);
-                }
-            }
-            lucide.createIcons();
-            initFilters();
-        }
-
-        function initFilters() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const filter = btn.dataset.filter;
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    document.querySelectorAll('.project-item').forEach(item => {
-                        if (filter === 'all' || item.dataset.category === filter) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
+                    targetGrid.appendChild(card);
                 });
-            });
+                lucide.createIcons();
+            } catch (e) { console.error(e); }
         }
 
-        fetchProjects();
+        populateProjects();
     </script>
 </body>
 

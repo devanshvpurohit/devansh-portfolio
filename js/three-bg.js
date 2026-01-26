@@ -6,6 +6,8 @@ import * as tsl from "three/tsl";
  * Lazy-loaded only on the Home page
  */
 export async function initBackground() {
+    if (window.innerWidth <= 768) return; // Hard Rule: No 3JS Background on Mobile
+
     const container = document.querySelector('.background-container');
     if (!container) return;
 

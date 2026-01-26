@@ -9,10 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticEffects();
 });
 
+const isMobile = window.innerWidth <= 768;
+
 /**
  * Satisfying Magnetic Physics for interactive elements
  */
 function initMagneticEffects() {
+    if (isMobile) return; // Disable for performance on mobile
+
     const magneticElements = document.querySelectorAll('.btn, .logo, .social-link, .card');
 
     magneticElements.forEach(el => {
@@ -40,16 +44,21 @@ function initMagneticEffects() {
  * Injects Navbar and Footer into the DOM
  */
 function injectSharedComponents() {
+    const isRoot = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+    const pathPrefix = isRoot ? 'pages/' : '';
+
     const navbarHTML = `
+        <div id="scroll-progress"></div>
         <nav class="navbar" id="navbar">
             <div class="container nav-content">
-                <a href="/" class="logo">DVP<span>.</span></a>
+                <a href="${isRoot ? '#' : '/'}" class="logo">DVP<span>.</span></a>
                 <ul class="nav-links">
-                    <li><a href="/" class="nav-link" data-page="home">Home</a></li>
-                    <li><a href="/pages/about.html" class="nav-link" data-page="about">About</a></li>
-                    <li><a href="/pages/projects.html" class="nav-link" data-page="projects">Projects</a></li>
-                    <li><a href="/pages/open-source.html" class="nav-link" data-page="os">Open Source</a></li>
-                    <li><a href="/pages/contact.html" class="nav-btn">Contact</a></li>
+                    <li><a href="${isRoot ? '#' : '/'}" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="${isRoot ? 'pages/about.html' : 'about.html'}" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="${isRoot ? 'pages/projects.html' : 'projects.html'}" class="nav-link" data-page="projects">Projects</a></li>
+                    <li><a href="${isRoot ? 'pages/open-source.html' : 'open-source.html'}" class="nav-link" data-page="os">Open Source</a></li>
+                    <li><a href="${isRoot ? 'assets/pdf/resume.pdf' : '../assets/pdf/resume.pdf'}" target="_blank" class="nav-link">Resume</a></li>
+                    <li><a href="${isRoot ? 'pages/contact.html' : 'contact.html'}" class="nav-btn">Contact</a></li>
                 </ul>
                 <div class="menu-toggle" id="menu-toggle">
                     <i data-lucide="menu"></i>
@@ -114,15 +123,24 @@ function highlightActiveNavLink() {
 }
 
 /**
- * Navbar scroll behavior
+ * Navbar scroll behavior & Progress Bar
  */
 function initScrollEffects() {
     const navbar = document.getElementById('navbar');
+    const scrollBar = document.getElementById('scroll-progress');
+
     window.addEventListener('scroll', () => {
+        // Sticky/Scrolled Navbar
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Progress Bar
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (scrollBar) scrollBar.style.width = scrolled + "%";
     });
 }
