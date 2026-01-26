@@ -36,7 +36,7 @@ function injectSharedComponents() {
                 <div class="footer-content">
                     <div class="footer-info">
                         <a href="/" class="logo">DVP<span>.</span></a>
-                        <p>Senior Software Engineer specializing in AI architectures and low-level system engineering.</p>
+                        <p>ADHD Computer Science Student specializing in AI architectures and low-level system engineering.</p>
                     </div>
                     <div class="footer-links">
                         <div class="social-links">

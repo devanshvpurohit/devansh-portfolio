@@ -85,25 +85,79 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // Simple client-side filtering
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.dataset.filter;
+        const USERNAME = 'devanshvpurohit';
+        const pinnedRepoNames = [
+            'ideas',
+            'ExplainCode',
+            'SecureVault',
+            'devansh-portfolio',
+            'esp32-wheelchair-sim',
+            'student-link-blast'
+        ];
 
-                // Toggle active class
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+        async function fetchProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = ''; // Clear loaders
 
-                // Filter items
-                document.querySelectorAll('.project-item').forEach(item => {
-                    if (filter === 'all' || item.dataset.category === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
+            for (const repoName of pinnedRepoNames) {
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${USERNAME}/${repoName}`);
+                    if (!res.ok) continue;
+                    const repo = await res.json();
+
+                    // Map categories for filtering (heuristic)
+                    let category = 'systems';
+                    if (repoName.includes('AI') || repo.language === 'Python') category = 'ai';
+                    if (repoName.includes('Vault') || repoName.includes('Secure')) category = 'security';
+
+                    const card = document.createElement('article');
+                    card.className = 'card project-item';
+                    card.dataset.category = category;
+                    card.innerHTML = `
+                        <div class="project-meta-top">
+                            <span class="badge">${repo.language || 'System'}</span>
+                            <div class="project-links">
+                                <a href="${repo.html_url}" target="_blank"><i data-lucide="github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">${repo.name}</h3>
+                        <p class="project-excerpt">${repo.description || 'No description available.'}</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#${repo.language || 'Code'}</span>
+                            ${repo.stargazers_count > 0 ? `<span class="project-tag"><i data-lucide="star" style="width:12px"></i> ${repo.stargazers_count}</span>` : ''}
+                        </div>
+                        <a href="${repo.homepage || repo.html_url}" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                            View Source <i data-lucide="arrow-right"></i>
+                        </a>
+                    `;
+                    grid.appendChild(card);
+                } catch (e) {
+                    console.error(`Error fetching ${repoName}:`, e);
+                }
+            }
+            lucide.createIcons();
+            initFilters();
+        }
+
+        function initFilters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.dataset.filter;
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    document.querySelectorAll('.project-item').forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
                 });
             });
-        });
+        }
+
+        fetchProjects();
     </script>
 </body>
 
