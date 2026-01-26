@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Devansh - Engineering Showcase</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages/projects.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <main style="padding-top: var(--space-12);">
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: var(--space-10);">
+                    <span class="badge" style="margin-bottom: var(--space-4);">Portfolio</span>
+                    <h2 style="margin-bottom: var(--space-4);">Selected <span class="gradient-text">Engineering
+                            Works.</span></h2>
+                    <p style="max-width: 600px; margin: 0 auto;">Proof of competence in high-performance computing, AI
+                        architectures, and secure systems.</p>
+                </div>
+
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="ai">AI / ML</button>
+                    <button class="filter-btn" data-filter="systems">Systems</button>
+                    <button class="filter-btn" data-filter="security">Security</button>
+                </div>
+
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Project Card 1: AI -->
+                    <article class="card project-item" data-category="ai">
+                        <div class="project-meta-top">
+                            <span class="badge">AI / CV</span>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Autonomous Drone Navigator</h3>
+                        <p class="project-excerpt">Real-time object detection and path planning using YOLOv8 and
+                            depth-sensing cameras.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#PyTorch</span>
+                            <span class="project-tag">#OpenCV</span>
+                        </div>
+                        <a href="project-detail.html?slug=drone-navigator" class="btn btn-secondary"
+                            style="width: 100%; justify-content: center;">
+                            Case Study <i data-lucide="chevron-right"></i>
+                        </a>
+                    </article>
+
+                    <!-- Project Card 2: Systems -->
+                    <article class="card project-item" data-category="systems">
+                        <div class="project-meta-top">
+                            <span class="badge">Systems / CPP</span>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Low-Latency Motor Controller</h3>
+                        <p class="project-excerpt">C++ driver for real-time BLDC motor control with PID loops and sensor
+                            fusion.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#C++20</span>
+                            <span class="project-tag">#RealTime</span>
+                        </div>
+                        <a href="project-detail.html?slug=motor-controller" class="btn btn-secondary"
+                            style="width: 100%; justify-content: center;">
+                            Case Study <i data-lucide="chevron-right"></i>
+                        </a>
+                    </article>
+
+                    <!-- More projects would be added here or dynamically loaded -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Simple client-side filtering
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+
+                // Toggle active class
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter items
+                document.querySelectorAll('.project-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail | Case Study</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages/project-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <main style="padding-top: var(--space-12);">
+        <section class="section-padding">
+            <div class="container">
+                <!-- Back Link -->
+                <a href="projects.html"
+                    style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-8); font-weight: 700;">
+                    <i data-lucide="arrow-left"></i> Back to Projects
+                </a>
+
+                <header class="detail-header">
+                    <span class="badge">Systems Engineering</span>
+                    <h1 id="p-title">Low-Latency Motor Controller</h1>
+                    <p id="p-subtitle">Architecting real-time feedback loops for high-torque BLDC motors.</p>
+                </header>
+
+                <div class="detail-meta-grid">
+                    <div class="meta-item">
+                        <label>Role</label>
+                        <p>Lead Engineer</p>
+                    </div>
+                    <div class="meta-item">
+                        <label>Timeline</label>
+                        <p>3 Months</p>
+                    </div>
+                    <div class="meta-item">
+                        <label>Core Tech</label>
+                        <p>C++20, STM32</p>
+                    </div>
+                    <div class="meta-item">
+                        <label>Links</label>
+                        <div style="display: flex; gap: var(--space-2);">
+                            <a href="#"><i data-lucide="github"></i></a>
+                            <a href="#"><i data-lucide="external-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study-content">
+                    <article class="chapter">
+                        <h3>The Problem</h3>
+                        <p>
+                            Off-the-shelf individual motor controllers lacked the deterministic timing required for
+                            multi-axis synchronous movement in robotic arms. High latency in the feedback loop caused
+                            oscillation and instability during high-speed operations.
+                        </p>
+                    </article>
+
+                    <article class="chapter">
+                        <h3>The Approach</h3>
+                        <p>
+                            I implemented a custom Field Oriented Control (FOC) algorithm using Modern C++. By
+                            leveraging hardware interrupts and DMA channels on the STM32, I was able to reduce the
+                            control loop latency to under 50 microseconds.
+                        </p>
+                        <div class="architecture-diagram">
+                            [ System Architecture Diagram Placeholder ]
+                        </div>
+                    </article>
+
+                    <article class="chapter">
+                        <h3>Impact & Results</h3>
+                        <p>
+                            The final controller yielded a 40% reduction in peak power consumption and enabled precision
+                            movements at speeds 3x faster than previous iterations. The project is now being used as the
+                            core driver in several experimental robotic platforms.
+                        </p>
+                    </article>
+
+                    <div class="tech-stack-summary">
+                        <h3>Stack</h3>
+                        <div class="tech-pile">
+                            <span class="badge">C++20</span>
+                            <span class="badge">RTOS</span>
+                            <span class="badge">CAN Bus</span>
+                            <span class="badge">SPI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

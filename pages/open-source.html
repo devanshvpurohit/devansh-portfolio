@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source | Devansh - Engineering Impact</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages/open-source.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <main style="padding-top: var(--space-12);">
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: var(--space-10);">
+                    <span class="badge" style="margin-bottom: var(--space-4);">Professional Footprint</span>
+                    <h2>Open Source & <span class="gradient-text">GitHub Impact.</span></h2>
+                </div>
+
+                <div class="github-summary">
+                    <div class="card gh-profile-card">
+                        <img id="gh-avatar" src="" alt="Avatar" class="gh-avatar">
+                        <h3 id="gh-name">Loading...</h3>
+                        <p id="gh-bio" style="margin-bottom: var(--space-4);">...</p>
+                        <a id="gh-link" href="#" target="_blank" class="btn btn-secondary">Visit Profile</a>
+                    </div>
+
+                    <div class="gh-metrics">
+                        <div class="gh-stats-grid">
+                            <div class="card gh-stat-box">
+                                <h2 id="repo-count">0</h2>
+                                <label>Repositories</label>
+                            </div>
+                            <div class="card gh-stat-box">
+                                <h2 id="follower-count">0</h2>
+                                <label>Followers</label>
+                            </div>
+                            <div class="card gh-stat-box">
+                                <h2 id="star-count">...</h2>
+                                <label>Total Stars</label>
+                            </div>
+                        </div>
+
+                        <div class="contributions-graph">
+                            <img id="gh-chart" src="https://ghchart.rshah.org/C5A059/devanshvpurohit"
+                                alt="GitHub Contributions Chart">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlighted-repos">
+                    <h3 style="margin-bottom: var(--space-6);">Pinned Repositories</h3>
+                    <div class="grid grid-cols-2" id="repos-grid">
+                        <!-- Repos fetched from API -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const USERNAME = 'devanshvpurohit';
+
+        async function fetchGitHubData() {
+            try {
+                const userRes = await fetch(`https://api.github.com/users/${USERNAME}`);
+                const data = await userRes.json();
+
+                document.getElementById('gh-avatar').src = data.avatar_url;
+                document.getElementById('gh-name').innerText = data.name || data.login;
+                document.getElementById('gh-bio').innerText = data.bio || 'Engineer.';
+                document.getElementById('gh-link').href = data.html_url;
+                document.getElementById('repo-count').innerText = data.public_repos;
+                document.getElementById('follower-count').innerText = data.followers;
+
+                // Simple repo fetch
+                const reposRes = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=6`);
+                const repos = await reposRes.json();
+                const grid = document.getElementById('repos-grid');
+
+                repos.forEach(repo => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span class="badge">${repo.language || 'System'}</span>
+                            <span><i data-lucide="star" style="width: 14px;"></i> ${repo.stargazers_count}</span>
+                        </div>
+                        <h4 style="margin-bottom: 8px;">${repo.name}</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;">${repo.description || 'No description available.'}</p>
+                        <a href="${repo.html_url}" target="_blank" style="font-weight: 700; color: var(--primary);">View Code <i data-lucide="arrow-right" style="width: 14px;"></i></a>
+                    `;
+                    grid.appendChild(card);
+                });
+                lucide.createIcons();
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        fetchGitHubData();
+    </script>
+</body>
+
+</html>

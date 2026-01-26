@@ -1,0 +1,90 @@
+/* Project Detail Page Styles */
+.detail-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto var(--space-10);
+}
+
+.detail-header h1 {
+    margin: var(--space-4) 0;
+}
+
+.detail-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    padding: var(--space-6) 0;
+    border-top: 1px solid var(--border-strong);
+    border-bottom: 1px solid var(--border-strong);
+    margin-bottom: var(--space-10);
+}
+
+.meta-item label {
+    display: block;
+    font-size: var(--fs-xs);
+    font-weight: 800;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+}
+
+.meta-item p {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--text);
+}
+
+.case-study-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chapter {
+    margin-bottom: var(--space-10);
+}
+
+.chapter h3 {
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.chapter h3::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.chapter p {
+    font-size: var(--fs-lg);
+    line-height: 1.8;
+}
+
+.tech-pile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+}
+
+.architecture-diagram {
+    background: var(--bg-alt);
+    border: 1px dashed var(--primary);
+    border-radius: var(--radius-md);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: var(--space-6) 0;
+}
+
+@media (max-width: 768px) {
+    .detail-meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+}

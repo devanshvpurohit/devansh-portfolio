@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Devansh - Engineering Collaboration</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <main style="padding-top: var(--space-12);">
+        <section class="section-padding">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <span class="badge" style="margin-bottom: var(--space-4);">Collaboration</span>
+                        <h2>Let's build the <span class="gradient-text">Next Generation.</span></h2>
+                        <p style="margin-bottom: var(--space-8); font-size: var(--fs-lg);">Currently open to high-impact
+                            roles in AI vision, system architecture, and secure infrastructure.</p>
+
+                        <div class="contact-methods">
+                            <div class="method">
+                                <div class="method-icon"><i data-lucide="mail"></i></div>
+                                <div>
+                                    <label
+                                        style="display: block; font-size: 10px; font-weight: 800; text-transform: uppercase;">Email</label>
+                                    <a href="mailto:devanshvpurohit@gmail.com"
+                                        style="font-weight: 700;">devanshvpurohit@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="method">
+                                <div class="method-icon"><i data-lucide="map-pin"></i></div>
+                                <div>
+                                    <label
+                                        style="display: block; font-size: 10px; font-weight: 800; text-transform: uppercase;">Location</label>
+                                    <p style="font-weight: 700;">Remote / India</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links" style="margin-top: var(--space-8);">
+                            <a href="https://github.com/devanshvpurohit" target="_blank" class="social-link"><i
+                                    data-lucide="github"></i></a>
+                            <a href="#" class="social-link"><i data-lucide="linkedin"></i></a>
+                            <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Project Collaboration">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="5" placeholder="Tell me about your project..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                                Send Message <i data-lucide="send"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

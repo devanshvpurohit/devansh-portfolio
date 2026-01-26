@@ -5,209 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Devansh's Portfolio - Engineering complex solutions in AI, Robotics, and Security.">
-    <title>Devansh | Software Engineer</title>
-    <link rel="stylesheet" href="style.css">
+        content="Senior Software Engineer - Architecting AI systems and low-level engineering solutions. Focused on performance and precision.">
+    <title>Devansh | Senior Software Engineer</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
+
     <script type="importmap">
         {
           "imports": {
             "three": "https://unpkg.com/three@0.181.0/build/three.webgpu.js",
             "three/webgpu": "https://unpkg.com/three@0.181.0/build/three.webgpu.js",
-            "three/tsl": "https://unpkg.com/three@0.181.0/build/three.tsl.js",
-            "three/addons/": "https://unpkg.com/three@0.181.0/examples/jsm/"
+            "three/tsl": "https://unpkg.com/three@0.181.0/build/three.tsl.js"
           }
         }
     </script>
 </head>
 
 <body>
-    <div class="background-container"></div>
-    <div class="cursor-glow"></div>
-    <div class="cursor-follower"></div>
-    <div class="noise-overlay"></div>
-
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">DVP<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#about" class="nav-item">About</a></li>
-                <li><a href="#projects" class="nav-item">Engineering</a></li>
-                <li><a href="#github" class="nav-item">Open Source</a></li>
-                <li><a href="#contact" class="nav-item contact-btn">Let's Collaborate</a></li>
-            </ul>
-            <div class="mobile-menu-btn" id="mobile-toggle">
-                <i data-lucide="menu"></i>
-            </div>
-        </div>
-    </nav>
-
-    <div class="mobile-nav-overlay" id="mobile-overlay">
-        <div class="mobile-nav-links">
-            <a href="#about" class="nav-item mobile-link">About</a>
-            <a href="#projects" class="nav-item mobile-link">Engineering</a>
-            <a href="#github" class="nav-item mobile-link">Open Source</a>
-            <a href="#contact" class="nav-item mobile-link">Contact</a>
-        </div>
+    <div class="background-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
     </div>
 
-    <section class="hero" id="home">
-        <div class="hero-bg">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content centralized reveal">
-            <div class="hero-tagline">
-                <div class="hero-avatar-container">
-                    <img src="" alt="DVP" class="hero-avatar" id="hero-profile-pic">
-                </div>
-                <span class="badge neon-text">Engineering | AI | Security</span>
-            </div>
-            <h1 class="hero-title">Engineering <span class="gradient-text">Excellence</span> Through Code.</h1>
-            <p class="hero-subtitle">Solving complex problems with intelligent architectures and low-level precision.
-                Based in India.</p>
-            <div class="hero-cta">
-                <a href="#projects" class="primary-btn">Explore My Work <i data-lucide="arrow-right"></i></a>
-                <a href="https://github.com/devanshvpurohit" target="_blank" class="secondary-btn">
-                    <i data-lucide="github"></i> Repository
-                </a>
-            </div>
-        </div>
-
-        <div class="hero-footer reveal-bottom" style="transition-delay: 0.6s;">
-            <div class="scroll-down">
-                <div class="mouse"></div>
-                <span>SCROLL TO DISCOVER</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="expertise-section" id="about">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 class="section-title">Core <span class="gradient-text">Expertise</span></h2>
-                <p class="section-desc">Bridging the gap between high-level AI architectures and low-level system
-                    engineering.</p>
-            </div>
-            <div class="expertise-grid">
-                <div class="expertise-card reveal">
-                    <div class="exp-icon"><i data-lucide="brain-circuit"></i></div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Computer Vision, NLP, and predictive modeling for autonomous systems.</p>
-                </div>
-                <div class="expertise-card reveal">
-                    <div class="exp-icon"><i data-lucide="binary"></i></div>
-                    <h3>Core Engineering</h3>
-                    <p>C/C++, Embedded systems, and performance-critical software development.</p>
-                </div>
-                <div class="expertise-card reveal">
-                    <div class="exp-icon"><i data-lucide="shield-check"></i></div>
-                    <h3>Security & Systems</h3>
-                    <p>Hardware-level security, secure data vaults, and protocol engineering.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid" id="github-stats">
-                <div class="stat-card reveal">
-                    <div class="stat-icon"><i data-lucide="code-2"></i></div>
-                    <h3 class="stat-number" id="repo-count">..</h3>
-                    <p class="stat-label">Sourced Repos</p>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-icon"><i data-lucide="users"></i></div>
-                    <h3 class="stat-number" id="follower-count">..</h3>
-                    <p class="stat-label">Collaborators</p>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-icon"><i data-lucide="zap"></i></div>
-                    <h3 class="stat-number">200+</h3>
-                    <p class="stat-label">Commits / Year</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="projects-section" id="projects">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 class="section-title">Engineering <span class="gradient-text">Repository</span></h2>
-                <p class="section-desc">A deep dive into my open-source contributions, research simulations, and core
-                    engineering systems.</p>
-            </div>
-
-            <div class="projects-grid" id="projects-container" style="grid-template-columns: repeat(2, 1fr);">
-                <!-- Loaded dynamically via GitHub API -->
-            </div>
-        </div>
-    </section>
-
-    <section class="github-feed" id="github">
-        <div class="container">
-            <div class="card reveal">
-                <div id="gh-profile" class="gh-profile-header">
-                    <!-- GitHub Profile Data -->
-                </div>
-                <div class="gh-stats-row">
-                    <div class="gh-stat-item">
-                        <span id="gh-public-repos">--</span>
-                        <label>Public Repos</label>
-                    </div>
-                    <div class="gh-stat-item">
-                        <span id="gh-followers">--</span>
-                        <label>Followers</label>
-                    </div>
-                </div>
-                <div class="gh-contributions">
-                    <img src="https://ghchart.rshah.org/7c4dff/devanshvpurohit" alt="GitHub Contributions" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <div class="cta-card reveal">
-                <div class="cta-content">
-                    <h2>Got a project that needs <span class="gradient-text">Sharp</span> engineering?</h2>
-                    <p>I'm currently open to freelance opportunities and full-time roles in AI, Security, and Core
-                        Engineering.</p>
-                    <div class="cta-buttons">
-                        <a href="mailto:devanshvpurohit@gmail.com" class="primary-btn">Hire Me <i
-                                data-lucide="mail"></i></a>
-                        <a href="resume.pdf" target="_blank" class="secondary-btn">Download Resume</a>
+    <main>
+        <!-- Home Hero -->
+        <section class="home-hero section-padding" style="min-height: 80vh; display: flex; align-items: center;">
+            <div class="container">
+                <div class="hero-content" style="max-width: 800px;">
+                    <span class="badge" style="margin-bottom: var(--space-4);">Senior Software Engineer</span>
+                    <h1 style="margin-bottom: var(--space-4);">
+                        Architecting <span class="gradient-text">Complex Systems</span> with Precision & Performance.
+                    </h1>
+                    <p style="font-size: var(--fs-xl); margin-bottom: var(--space-8); max-width: 600px;">
+                        Solving high-stakes engineering problems in AI architectures, low-level systems, and security
+                        protocols.
+                    </p>
+                    <div class="cta-group" style="display: flex; gap: var(--space-4);">
+                        <a href="pages/projects.html" class="btn btn-primary">
+                            View Engineering Projects <i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="assets/pdf/resume.pdf" target="_blank" class="btn btn-secondary">
+                            Download Resume <i data-lucide="download"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-left">
-                <a href="#" class="logo">DVP<span>.</span></a>
-                <p>Engineering complex solutions with ADHD-fueled curiosity.</p>
-            </div>
-            <div class="footer-right">
-                <div class="social-links">
-                    <a href="https://github.com/devanshvpurohit" target="_blank"><i data-lucide="github"></i></a>
-                    <a href="#"><i data-lucide="twitter"></i></a>
-                    <a href="#"><i data-lucide="linkedin"></i></a>
+        <!-- Quick Proof Section (Optional, but good for recruiters) -->
+        <section class="trust-grid section-padding" style="border-top: 1px solid var(--border-strong);">
+            <div class="container">
+                <div class="grid grid-cols-3">
+                    <div class="proof-card">
+                        <h3 style="color: var(--primary);">01. AI / ML</h3>
+                        <p>Specializing in Computer Vision and autonomous navigation systems.</p>
+                    </div>
+                    <div class="proof-card">
+                        <h3 style="color: var(--primary);">02. Systems</h3>
+                        <p>High-performance C++ development for real-time robotic controls.</p>
+                    </div>
+                    <div class="proof-card">
+                        <h3 style="color: var(--primary);">03. Security</h3>
+                        <p>Hardened data vaults and encryption protocol implementation.</p>
+                    </div>
                 </div>
-                <p class="copyright">&copy; 2025 Devansh. All rights reserved.</p>
             </div>
-        </div>
-    </footer>
+        </section>
+    </main>
 
-    <script type="module" src="script.js"></script>
+    <!-- Global Scripts -->
+    <script src="js/main.js"></script>
+    <script type="module">
+        import { initBackground } from './js/three-bg.js';
+        initBackground();
+    </script>
 </body>
 
 </html>
