@@ -36,9 +36,9 @@ export async function initBackground() {
 
     const bloomPass = new UnrealBloomPass(
         new THREE.Vector2(window.innerWidth, window.innerHeight),
-        2.2, // strength
-        0.8, // radius
-        0.1  // threshold
+        0.5, // strength (Reduced from 2.2)
+        0.5, // radius
+        0.2  // threshold
     );
     composer.addPass(bloomPass);
 
@@ -52,7 +52,7 @@ export async function initBackground() {
         new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1)
     ];
 
-    const lineCount = 90;
+    const lineCount = 60; // Reduced count for subtlety
     const segmentsPerLine = 1000;
     const spiralRevolutions = 0.4;
     const tornadoGroup = new THREE.Group();
@@ -86,7 +86,8 @@ export async function initBackground() {
         float fade = 1.0 - smoothstep(0.6, 0.9, vDistanceFromCenter / 0.9);
         float zFade = 1.0 - smoothstep(0.4, 0.8, abs(vPosition.z));
         float xFade = 1.0 - smoothstep(0.4, 0.8, abs(vPosition.x));
-        gl_FragColor = vec4(uColor, fade * zFade * xFade);
+        // Multiplied by 0.2 for subtle transparency
+        gl_FragColor = vec4(uColor, fade * zFade * xFade * 0.2); 
       }
     `;
 
@@ -114,7 +115,7 @@ export async function initBackground() {
         linesData.push({
             line, positions,
             phaseOffset: Math.random() * Math.PI * 2,
-            speed: 0.001 + Math.random() * 0.001,
+            speed: 0.0005 + Math.random() * 0.0005, // Slower speed
             length: Math.PI * 3 + Math.random() * Math.PI,
             uOffset: Math.random() * Math.PI * 2,
             rOffset: (Math.random() - 0.2) * 0.1,
@@ -122,7 +123,7 @@ export async function initBackground() {
     }
 
     // Particles
-    const particleCount = 5000;
+    const particleCount = 3000; // Reduced count
     const particlesGeometry = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
@@ -131,7 +132,7 @@ export async function initBackground() {
         color: 0xD4AF37,
         size: 0.002,
         transparent: true,
-        opacity: 0.3,
+        opacity: 0.12, // Reduced opacity
         blending: THREE.AdditiveBlending,
         clippingPlanes: clippingPlanes,
     });
