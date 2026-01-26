@@ -6,7 +6,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     injectSharedComponents();
     initScrollEffects();
+    initMagneticEffects();
 });
+
+/**
+ * Satisfying Magnetic Physics for interactive elements
+ */
+function initMagneticEffects() {
+    const magneticElements = document.querySelectorAll('.btn, .logo, .social-link, .card');
+
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            // ADHD Satisfaction - Dynamic movement based on element size
+            const strength = el.classList.contains('card') ? 10 : 25;
+
+            el.style.transform = `translate(${x / strength}px, ${y / strength}px) scale(1.02)`;
+            if (el.classList.contains('card')) {
+                el.style.transform += ` rotateX(${-y / 15}deg) rotateY(${x / 15}deg)`;
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = '';
+        });
+    });
+}
 
 /**
  * Injects Navbar and Footer into the DOM

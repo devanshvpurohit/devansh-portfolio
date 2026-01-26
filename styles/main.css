@@ -52,7 +52,11 @@
     --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05);
     --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --shadow-gold: 0 15px 35px rgba(197, 160, 89, 0.1);
+    --shadow-gold: 0 15px 35px rgba(197, 160, 89, 0.15);
+
+    /* ADHD Aesthetic Tokens - Kinetic & High Energy */
+    --glitch-color: rgba(197, 160, 89, 0.5);
+    --focus-scale: 1.02;
 }
 
 /* Base Resets */
@@ -122,11 +126,35 @@ ul {
 }
 
 /* Utilities */
+/* Kinetic Typography */
 .gradient-text {
-    background: linear-gradient(135deg, var(--text) 0%, var(--primary) 70%);
+    background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, #FF6B6B 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: shine 8s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+
+    100% {
+        background-position: 0% center;
+    }
+}
+
+/* Satisfaction Utilities */
+.focus-dim-container:hover>*:not(:hover) {
+    opacity: 0.4;
+    filter: blur(2px) grayscale(0.5);
+    transform: scale(0.98);
 }
 
 .badge {
