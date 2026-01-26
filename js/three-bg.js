@@ -3,11 +3,10 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 
 /**
- * Three.js Cinematic Tornado Background
- * Features: High-density particles, Bloom, and OBJ focal point
+ * Three.js Cinematic Gold Tornado Background
+ * Features: High-density gold particles, Bloom Post-Processing
  */
 export async function initBackground() {
     if (window.innerWidth <= 768) return;
@@ -37,8 +36,8 @@ export async function initBackground() {
 
     const bloomPass = new UnrealBloomPass(
         new THREE.Vector2(window.innerWidth, window.innerHeight),
-        1.8, // strength
-        0.5, // radius
+        2.2, // strength
+        0.8, // radius
         0.1  // threshold
     );
     composer.addPass(bloomPass);
@@ -53,7 +52,7 @@ export async function initBackground() {
         new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1)
     ];
 
-    const lineCount = 80;
+    const lineCount = 90;
     const segmentsPerLine = 1000;
     const spiralRevolutions = 0.4;
     const tornadoGroup = new THREE.Group();
@@ -91,6 +90,9 @@ export async function initBackground() {
       }
     `;
 
+    // Gold Theme Vector (Radiant Gold #D4AF37)
+    const goldColorVec = new THREE.Vector3(0.83, 0.69, 0.22);
+
     for (let i = 0; i < lineCount; i++) {
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(segmentsPerLine * 3);
@@ -99,7 +101,7 @@ export async function initBackground() {
         const material = new THREE.ShaderMaterial({
             vertexShader: lineVertexShader,
             fragmentShader: lineFragmentShader,
-            uniforms: { uColor: { value: new THREE.Vector3(0.4, 0.7, 1.0) } },
+            uniforms: { uColor: { value: goldColorVec } },
             transparent: true,
             blending: THREE.AdditiveBlending,
             clippingPlanes: clippingPlanes,
@@ -120,16 +122,16 @@ export async function initBackground() {
     }
 
     // Particles
-    const particleCount = 4000;
+    const particleCount = 5000;
     const particlesGeometry = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-        color: 0x66ccff,
+        color: 0xD4AF37,
         size: 0.002,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.3,
         blending: THREE.AdditiveBlending,
         clippingPlanes: clippingPlanes,
     });
@@ -151,26 +153,9 @@ export async function initBackground() {
     tornadoGroup.rotation.y = THREE.MathUtils.degToRad(18);
 
     scene.add(new THREE.AmbientLight(0x404040));
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
     dirLight.position.set(0, 5, 5);
     scene.add(dirLight);
-
-    let angelModel = null;
-    const loader = new OBJLoader();
-    loader.load("https://cdn.jsdelivr.net/gh/danielyl123/person/person.obj", (object) => {
-        const box = new THREE.Box3().setFromObject(object);
-        const center = box.getCenter(new THREE.Vector3());
-        object.position.sub(center);
-        const scale = 0.13 / Math.max(box.getSize(new THREE.Vector3()).x, box.getSize(new THREE.Vector3()).y, box.getSize(new THREE.Vector3()).z);
-        object.scale.set(scale, scale, scale);
-        object.position.set(0.9, -0.6, 0);
-        object.rotation.y = Math.PI / -2;
-        object.traverse(c => {
-            if (c.isMesh) c.material = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, roughness: 0.3, metalness: 0.8, side: THREE.DoubleSide });
-        });
-        scene.add(object);
-        angelModel = object;
-    }, undefined, (e) => console.warn("Model load failed - switching to fallback orbit."));
 
     function animate() {
         requestAnimationFrame(animate);
@@ -202,7 +187,6 @@ export async function initBackground() {
             pPositions[i * 3 + 2] = effectiveR * Math.sin(currentV);
         });
         particlesGeometry.attributes.position.needsUpdate = true;
-        if (angelModel) angelModel.position.y = -0.55 + Math.sin(time * 2) * 0.01;
 
         controls.update();
         composer.render();

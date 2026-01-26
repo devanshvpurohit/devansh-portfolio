@@ -1,13 +1,21 @@
-/**
- * Global Portfolio Logic
- * Handles shared components, scroll effects, and accessibility
- */
+const GITHUB_USER = 'devanshvpurohit';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     injectSharedComponents();
     initScrollEffects();
     initMagneticEffects();
+    injectAvatar();
 });
+
+/**
+ * Universally Injects GitHub Avatar into elements with 'gh-pfp-inject' class
+ */
+async function injectAvatar() {
+    const avatarUrl = `https://avatars.githubusercontent.com/${GITHUB_USER}`;
+    document.querySelectorAll('.gh-pfp-inject').forEach(img => {
+        img.src = avatarUrl;
+    });
+}
 
 const isMobile = window.innerWidth <= 768;
 

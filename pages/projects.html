@@ -12,10 +12,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+          }
+        }
+    </script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
+    <div class="noise-overlay"></div>
+    <div class="background-container"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000;"></div>
     <main style="padding-top: var(--space-12);">
         <section class="section-padding">
             <div class="container">
@@ -109,9 +120,9 @@
 
         async function populateProjects() {
             try {
-                const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=12`);
+                const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`);
                 const repos = await res.json();
-                
+
                 const supportingGrid = document.getElementById('supporting-grid');
                 const experimentsGrid = document.getElementById('experiments-grid');
 
@@ -139,6 +150,10 @@
         }
 
         populateProjects();
+    </script>
+    <script type="module">
+        import { initBackground } from '../js/three-bg.js';
+        initBackground();
     </script>
 </body>
 
